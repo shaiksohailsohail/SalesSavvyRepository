@@ -1,13 +1,17 @@
 package com.example.demo.Service;
 
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.JWTToken;
 import com.example.demo.entity.User;
+import com.example.demo.repository.JWTTokenRepository;
 import com.example.demo.repository.UserRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -16,7 +20,7 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class AuthService {
-	private final String SECRET_KEY = "zj3E9KD5FGQh!X7a9Mpn&bTyVw2@8NZL4oCrYq6kJU%Rv#WA1XdPt$EmH*Q\n";
+	private final String SIGNING_KEY = "zj3E9KD5FGQh!X7a9Mpn&bTyVw2@8NZL4oCrYq6kJU%Rv#WA1XdPt$EmH*Q\n";
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 	
@@ -42,8 +46,35 @@ public class AuthService {
 					.signWith(key, SignatureAlgorithm.HS512) 
 					.compact(); 
 			}
+		public boolean validateToken(String token) {
+			try { 
+				
+				Jwts.parserBuilder()
+				.setSigningKey(SIGNING_KEY) 
+				.build() 
+				.parseClaimsJws(token);
+				
+				
+				Optional<JWTToken> jwtToken = JWTTokenRepository.findByToken(token);
+				
+				return jwtToken.isPresent() && jwtToken.get().getExpiresAt().isAfter(LocalDateTime.now());
+				} 
+			      catch (Exception e)  
+		       	{
+					return false; 
+					}
+
+			} public String extractUsername(String token) { 
+				return Jwts.parserBuilder()
+				.setSigningKey(SIGNING_KEY) 
+				.build()
+				.parseClaimsJws(token)
+				.getBody()
+				.getSubject();
+				}
+		}
 		
 		
-	}
+	
 	 
 

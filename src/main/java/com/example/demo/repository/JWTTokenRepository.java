@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.JWTToken;
 
-public interface JWTTokenRepositary extends JpaRepository<JWTToken, Integer> {
+public interface JWTTokenRepository extends JpaRepository<JWTToken, Integer> {
 
 }

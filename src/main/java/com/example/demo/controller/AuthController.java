@@ -44,7 +44,24 @@ public class AuthController {
 	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
      } 
 	}
-}	
+	@PostMapping("/logout") 
+	public ResponseEntity<Map<String, String>> logout(HttpServletResponse response) {
+		try
+		{ 
+			authService.logout(response);
+			Map<String, String> responseBody = new HashMap<>();
+			responseBody.put("message", "Logout successful"); 
+			return ResponseEntity.ok(responseBody); 
+			}
+		  catch (RuntimeException e)
+		{
+		Map<String, String> errorResponse = new HashMap<>(); 
+		errorResponse.put("message", "Logout failed");
+
+	return ResponseEntity.status(500).body(errorResponse);
+	}
+}
+}
 	
 	
 

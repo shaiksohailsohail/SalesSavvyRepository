@@ -67,14 +67,11 @@ public class AuthenticationFilter implements Filter {
 	private String getAuthTokenFromCookies(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if(cookies!= null) {
-			return Arrays.stream(cookies) 
+			return Arrays.stream(cookies)
 			   .filter(cookie -> "authToken".equals(cookie.getname()))
 			   .map(Cookie::getvalue)
 			   .findfirst()
-			   .orElse(null);
-			   
-			
-			
+			   .orElse(null);		
 		}
 		return null;
 	}
