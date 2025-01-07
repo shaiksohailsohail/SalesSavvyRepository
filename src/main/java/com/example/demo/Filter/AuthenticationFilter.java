@@ -1,6 +1,7 @@
 package com.example.demo.Filter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 
 
@@ -9,7 +10,7 @@ import com.example.demo.Service.AuthService;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 
-import io.jsonwebtoken.lang.Arrays;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -68,9 +69,9 @@ public class AuthenticationFilter implements Filter {
 		Cookie[] cookies = request.getCookies();
 		if(cookies!= null) {
 			return Arrays.stream(cookies)
-			   .filter(cookie -> "authToken".equals(cookie.getname()))
-			   .map(Cookie::getvalue)
-			   .findfirst()
+			   .filter(cookie -> "authToken".equals(cookie.getName()))
+			   .map(Cookie:: getValue)
+			   .findFirst()
 			   .orElse(null);		
 		}
 		return null;

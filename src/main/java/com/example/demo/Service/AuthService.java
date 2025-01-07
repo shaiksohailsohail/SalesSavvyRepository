@@ -17,6 +17,7 @@ import com.example.demo.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class AuthService {
@@ -72,6 +73,10 @@ public class AuthService {
 				.getBody()
 				.getSubject();
 				}
+			public void logout(HttpServletResponse response) {
+				// TODO Auto-generated method stub
+				
+			}
 		}
 		
 		
