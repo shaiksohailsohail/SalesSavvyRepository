@@ -17,7 +17,9 @@ import com.example.demo.Service.AuthService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
- 
+
+
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5174", allowCredentials = "true")
 @RequestMapping("/api/auth")
@@ -26,9 +28,7 @@ public class AuthController {
     private final AuthService authService;
     public AuthController(AuthService authService) {
         this.authService = authService;
-    }
- 
-    
+    }   
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         try {
@@ -42,18 +42,16 @@ public class AuthController {
             cookie.setMaxAge(3600); // 1 hour
             cookie.setDomain("localhost");
             response.addCookie(cookie);
-           // Optional but useful
-            
+           // Optional but useful          
             response.addHeader("Set-Cookie",
-                    String.format("authToken=%s; HttpOnly; Path=/; Max-Age=3600; SameSite=None", token));
+            String.format("authToken=%s; HttpOnly; Path=/; Max-Age=3600; SameSite=None", token));
             
             Map<String, Object> responseBody = new HashMap<>();
             responseBody.put("message", "Login successful");
             responseBody.put("role", user.getRole().name());
             responseBody.put("username", user.getUsername());
  
-            return ResponseEntity.ok(responseBody);
-            
+            return ResponseEntity.ok(responseBody);           
         } 
         catch (RuntimeException e) 
         {
@@ -78,7 +76,11 @@ public class AuthController {
             errorResponse.put("message", "Logout failed");
             return ResponseEntity.status(500).body(errorResponse);
         }
+  
+    
     }    
+
+
 }
 
 

@@ -2,7 +2,7 @@ package com.example.demo.dto;
 
 import java.math.BigDecimal;
 
-//Class to hold detailed cart item information
+//Class to hold detailed cart item informations 
 public class CartItemDetails {
  private int productId;
  private String name;
@@ -73,10 +73,14 @@ public class CartItemDetails {
  }
 
  public BigDecimal getTotalPrice() {
+	 
      return totalPrice;
+     
  }
 
  public void setTotalPrice(BigDecimal totalPrice) {
      this.totalPrice = totalPrice;
+     
  }
+ 
 }
