@@ -12,36 +12,32 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="jwt_tokens")
+@Table(name = "jwt_tokens")
 public class JWTToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer tokenId;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-    
-	@Column(nullable = false)
-	private String token;
-	
-	@Column(nullable = false)
-	private LocalDateTime expiresAt;
-	
-	public JWTToken() {
-		// TODO Auto-generated constructor stub
-	}
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Specifies that the tokenId will be auto-generated.
+    private Integer tokenId; // Stores the unique identifier for each token.
 
-	public JWTToken(User user, String token, LocalDateTime expiresAt) {
+    @ManyToOne // Establishes a many-to-one relationship with the User entity.
+    @JoinColumn(name = "user_id", nullable = false) // Links the token to a specific user in the Users table.
+    private User user; // Represents the user associated with the token.
+
+    @Column(nullable = false) // Ensures that the token cannot be null.
+    private String token; // Stores the JWT token string.
+
+    @Column(nullable = false) // Ensures that the expiration time cannot be null.
+    private LocalDateTime expiresAt; // Stores the expiration time of the token.
+
+	public JWTToken(Integer tokenId, User user, String token, LocalDateTime expiresAt) {
 		super();
+		this.tokenId = tokenId;
 		this.user = user;
 		this.token = token;
 		this.expiresAt = expiresAt;
 	}
 
-	public JWTToken(Integer tokenId, User user, String token, LocalDateTime expiresAt) {
+	public JWTToken(User user, String token, LocalDateTime expiresAt) {
 		super();
-		this.tokenId = tokenId;
 		this.user = user;
 		this.token = token;
 		this.expiresAt = expiresAt;
@@ -78,6 +74,9 @@ public class JWTToken {
 	public void setExpiresAt(LocalDateTime expiresAt) {
 		this.expiresAt = expiresAt;
 	}
-	
-	
+
+    // Getters and Setters
+    public JWTToken() {
+		// TODO Auto-generated constructor stub
+	}   
 }

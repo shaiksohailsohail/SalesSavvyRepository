@@ -25,6 +25,8 @@ public class ProductImage {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
+    // Getters and Setters
+    
     public ProductImage() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,6 +34,12 @@ public class ProductImage {
 	public ProductImage(Integer imageId, Product product, String imageUrl) {
 		super();
 		this.imageId = imageId;
+		this.product = product;
+		this.imageUrl = imageUrl;
+	}
+
+	public ProductImage(Product product, String imageUrl) {
+		super();
 		this.product = product;
 		this.imageUrl = imageUrl;
 	}
@@ -58,5 +66,8 @@ public class ProductImage {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
-	}   
+	}
+    
+    
+    
 }
