@@ -9,6 +9,9 @@ String password;
 
 public LoginRequest() {
 	// TODO Auto-generated constructor stub
+	
+
+	
 }
 public LoginRequest(String username, String password) {
 	super();
@@ -24,6 +27,9 @@ public void setUsername(String username) {
 public String getPassword() {
 	return password;
 }
+
+
+
 public void setPassword(String password) {
 	this.password = password;
 }
